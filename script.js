@@ -154,7 +154,7 @@ document.addEventListener("DOMContentLoaded", () => {
     })();
   }
 
-  const personalWish = "Happy Birthday Diksha! ❤️\n\nYou know, I've always felt that some of our conversations were really special. It's funny how sometimes just a few words or a simple chat can make someone's day a little better. Our conversations made me realise how much happiness even the smallest things can bring.\n\nWishing you a year filled with countless little moments that bring a genuine smile to your face.\n\nThank you for being so amazing. I hope life brings you all the happiness you deserve. Here's to making this year the best one yet! 🥂";
+  const personalWish = "Happy Birthday Diksha! 🤍️\n\nYou know, I've always felt that some of our conversations were really special. It's funny how sometimes just a few words or a simple chat can make someone's day a little better. Our conversations made me realise how much happiness even the smallest things can bring.\n\nWishing you a year filled with countless little moments that bring a genuine smile to your face.\n\nThank you for being so amazing. I hope life brings you all the happiness you deserve. Here's to making this year the best one yet! 🥂";
 
   function startTypewriter() {
     const target = document.getElementById("typewriterText");
