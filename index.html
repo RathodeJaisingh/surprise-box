@@ -60,14 +60,24 @@
             <h2>Make a wish and blow out the candle!</h2>
         </div>
 
-        <!-- Stage 4: Photo & Letter (Grand Reveal) -->
+        <!-- Inside Stage 4: Photo Reveal in index.html -->
         <div class="scene" id="scene-reveal">
-            <!-- In index.html: change src from "assets/photo.jpg" to "photo.jpg" -->
-            <div class="polaroid">
-                <img src="assets/dikshaBD.png" alt="Birthday Special Girl" />
-                <div class="polaroid-caption">Feeling 22 ✨</div>
+
+            <!-- Multi-Photo Polaroid Carousel -->
+            <div class="polaroid-carousel">
+                <button class="gallery-nav prev" id="prevPhotoBtn" type="button" aria-label="Previous Photo">&#10094;</button>
+
+                <div class="polaroid" id="polaroidCard">
+                    <img id="galleryImg" src="assets/dikshaBD.png" alt="Special Memory" />
+                    <div class="polaroid-caption" id="galleryCaption">Memory 1 of 3 ✨</div>
+                </div>
+
+                <button class="gallery-nav next" id="nextPhotoBtn" type="button" aria-label="Next Photo">&#10095;</button>
             </div>
-            <h1 class="headline">Happy Birthday!</h1>
+
+            <div class="gallery-dots" id="galleryDots"></div>
+
+            <h1 class="headline">Happy 22nd Birthday! 🥂</h1>
             <div class="letter-box">
                 <p id="typewriterText"></p>
             </div>

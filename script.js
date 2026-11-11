@@ -109,3 +109,59 @@ function switchScene(nextIndex) {
   actionBtn.textContent = steps[currentStep].buttonText;
   statusPill.textContent = steps[currentStep].status;
 }
+
+
+
+// --- Multi-Photo Gallery Configuration ---
+const photoList = [
+  { src: "assets/dikshaBD.png", caption: "Feeling 22 ✨" },
+  { src: "assets/DSakshi.png", caption: "Unforgettable memories 📸" }
+];
+
+let photoIndex = 0;
+const galleryImg = document.getElementById("galleryImg");
+const galleryCaption = document.getElementById("galleryCaption");
+const prevPhotoBtn = document.getElementById("prevPhotoBtn");
+const nextPhotoBtn = document.getElementById("nextPhotoBtn");
+const galleryDotsContainer = document.getElementById("galleryDots");
+
+function setupDots() {
+  if (!galleryDotsContainer) return;
+  galleryDotsContainer.innerHTML = "";
+  photoList.forEach((_, idx) => {
+    const dot = document.createElement("div");
+    dot.className = `dot ${idx === photoIndex ? "active" : ""}`;
+    dot.addEventListener("click", () => renderPhoto(idx));
+    galleryDotsContainer.appendChild(dot);
+  });
+}
+
+function renderPhoto(index) {
+  photoIndex = index;
+  galleryImg.classList.remove("fade-in");
+  void galleryImg.offsetWidth; // Trigger reflow for re-animation
+
+  galleryImg.src = photoList[photoIndex].src;
+  galleryCaption.textContent = photoList[photoIndex].caption;
+  galleryImg.classList.add("fade-in");
+
+  // Update active dot
+  const dots = document.querySelectorAll(".gallery-dots .dot");
+  dots.forEach((dot, idx) => {
+    dot.classList.toggle("active", idx === photoIndex);
+  });
+}
+
+if (prevPhotoBtn && nextPhotoBtn) {
+  prevPhotoBtn.addEventListener("click", () => {
+    const newIdx = (photoIndex - 1 + photoList.length) % photoList.length;
+    renderPhoto(newIdx);
+  });
+
+  nextPhotoBtn.addEventListener("click", () => {
+    const newIdx = (photoIndex + 1) % photoList.length;
+    renderPhoto(newIdx);
+  });
+
+  setupDots();
+}
