@@ -343,3 +343,134 @@ p {
   background: #ec4899;
   transform: scale(1.25);
 }
+
+
+/* Full-Screen Locked Welcome Curtain */
+.welcome-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100dvh; /* Fits mobile & desktop viewports without vertical cutoff */
+  z-index: 99999;
+  background: radial-gradient(circle at 50% 35%, #2e1065 0%, #090d16 65%, #02040a 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1.25rem;
+  box-sizing: border-box;
+  overflow: hidden;
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.welcome-overlay.fade-out {
+  opacity: 0;
+  transform: scale(1.06);
+  pointer-events: none;
+}
+
+#welcomeCanvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Responsive Centered Glass Card */
+.welcome-card {
+  position: relative;
+  z-index: 2;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 390px;
+  padding: 2.25rem 1.75rem;
+  border-radius: 24px;
+  background: rgba(15, 23, 42, 0.65);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 35px rgba(236, 72, 153, 0.25);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.vip-badge {
+  display: inline-block;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: #f472b6;
+  background: rgba(244, 114, 182, 0.14);
+  border: 1px solid rgba(244, 114, 182, 0.35);
+  padding: 5px 12px;
+  border-radius: 999px;
+  margin-bottom: 1.1rem;
+  white-space: nowrap;
+}
+
+.welcome-title {
+  font-size: clamp(1.85rem, 6vw, 2.35rem);
+  font-weight: 800;
+  line-height: 1.2;
+  background: linear-gradient(135deg, #ffffff 15%, #f9a8d4 60%, #c084fc 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin: 0 0 0.75rem 0;
+}
+
+.welcome-sub {
+  color: #cbd5e1;
+  font-size: 0.95rem;
+  line-height: 1.55;
+  margin: 0 0 1.75rem 0;
+  max-width: 300px;
+}
+
+/* Shimmering Unlock Button */
+.enter-btn {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  max-width: 240px;
+  padding: 0.95rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #ffffff;
+  background: linear-gradient(135deg, #ec4899, #8b5cf6);
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  box-shadow: 0 10px 25px rgba(236, 72, 153, 0.5);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.enter-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 32px rgba(236, 72, 153, 0.75);
+}
+
+.enter-btn:active {
+  transform: scale(0.97);
+}
+
+.btn-shine {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 55%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.45), transparent);
+  transform: skewX(-25deg);
+  animation: shineSweep 2.8s infinite;
+}
+
+@keyframes shineSweep {
+  0%, 55% { left: -100%; }
+  100% { left: 165%; }
+}

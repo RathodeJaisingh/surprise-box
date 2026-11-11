@@ -7,9 +7,24 @@
     <link rel="stylesheet" href="style.css" />
     <!-- Confetti script -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <link rel="stylesheet" href="style.css?v=4" />
 </head>
+<script src="script.js?v=4"></script>
 <body class="dark-mode">
 
+<!-- Full-Screen Interactive Welcome Curtain -->
+<div class="welcome-overlay" id="welcomeOverlay">
+    <canvas id="welcomeCanvas"></canvas>
+    <div class="welcome-card" id="welcomeCard">
+        <div class="vip-badge">✨ EXCLUSIVE INVITATION ✨</div>
+        <h1 class="welcome-title">Hey Diksha,</h1>
+        <p class="welcome-sub">Someone put together a little secret just for you today...</p>
+        <button class="enter-btn" id="enterSurpriseBtn">
+            <span>Tap to Unlock</span>
+            <span class="btn-shine"></span>
+        </button>
+    </div>
+</div>
 <!-- Audio Element -->
 <audio id="bgMusic" preload="auto" loop src="assets/AayaSher.mp3"></audio>
 <!-- Floating Balloons Container -->
@@ -90,6 +105,6 @@
 
 </main>
 
-<script src="script.js"></script>
+<script src="script.js?v=8"></script>
 </body>
 </html>
