@@ -111,14 +111,21 @@ function switchScene(nextIndex) {
 }
 
 
-
 // --- Multi-Photo Gallery Configuration ---
 const photoList = [
   { src: "assets/dikshaBD.png", caption: "Feeling 22 ✨" },
   { src: "assets/DSakshi.png", caption: "Cuteness Overloaded 📸" }
 ];
 
+// 1. Preload all images in background so there is ZERO lag on click
+photoList.forEach((item) => {
+  const preloadImg = new Image();
+  preloadImg.src = item.src;
+});
+
 let photoIndex = 0;
+let isAnimating = false;
+
 const galleryImg = document.getElementById("galleryImg");
 const galleryCaption = document.getElementById("galleryCaption");
 const prevPhotoBtn = document.getElementById("prevPhotoBtn");
@@ -131,19 +138,42 @@ function setupDots() {
   photoList.forEach((_, idx) => {
     const dot = document.createElement("div");
     dot.className = `dot ${idx === photoIndex ? "active" : ""}`;
-    dot.addEventListener("click", () => renderPhoto(idx));
+    dot.addEventListener("click", (e) => {
+      e.stopPropagation(); // Prevent triggering card flip if nested
+      if (idx !== photoIndex) renderPhoto(idx);
+    });
     galleryDotsContainer.appendChild(dot);
   });
 }
 
 function renderPhoto(index) {
+  if (isAnimating || !galleryImg) return;
+  isAnimating = true;
   photoIndex = index;
-  galleryImg.classList.remove("fade-in");
-  void galleryImg.offsetWidth; // Trigger reflow for re-animation
 
-  galleryImg.src = photoList[photoIndex].src;
-  galleryCaption.textContent = photoList[photoIndex].caption;
-  galleryImg.classList.add("fade-in");
+  // Step 1: Fade out current image smoothly
+  galleryImg.style.opacity = "0";
+  galleryImg.style.transform = "scale(0.96)";
+
+  setTimeout(() => {
+    // Step 2: Swap source only after fade-out completes
+    galleryImg.src = photoList[photoIndex].src;
+    galleryCaption.textContent = photoList[photoIndex].caption;
+
+    // Step 3: Wait until the new image is completely decoded before fading back in
+    const reveal = () => {
+      galleryImg.style.opacity = "1";
+      galleryImg.style.transform = "scale(1)";
+      isAnimating = false;
+    };
+
+    if (galleryImg.complete) {
+      reveal();
+    } else {
+      galleryImg.onload = reveal;
+      galleryImg.onerror = reveal; // Failsafe unlock
+    }
+  }, 180);
 
   // Update active dot
   const dots = document.querySelectorAll(".gallery-dots .dot");
@@ -153,12 +183,14 @@ function renderPhoto(index) {
 }
 
 if (prevPhotoBtn && nextPhotoBtn) {
-  prevPhotoBtn.addEventListener("click", () => {
+  prevPhotoBtn.addEventListener("click", (e) => {
+    e.stopPropagation(); // Stops click from accidentally flipping the card
     const newIdx = (photoIndex - 1 + photoList.length) % photoList.length;
     renderPhoto(newIdx);
   });
 
-  nextPhotoBtn.addEventListener("click", () => {
+  nextPhotoBtn.addEventListener("click", (e) => {
+    e.stopPropagation(); // Stops click from accidentally flipping the card
     const newIdx = (photoIndex + 1) % photoList.length;
     renderPhoto(newIdx);
   });
