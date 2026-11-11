@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>A Special Surprise for You!</title>
+    <link rel="stylesheet" href="style.css" />
+    <!-- Confetti script -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+</head>
+<body class="dark-mode">
+
+<!-- Audio Element -->
+<audio id="bgMusic" preload="auto" loop src="assets/AayaSher.mp3"></audio>
+<!-- Floating Balloons Container -->
+<div id="balloon-container"></div>
+
+<!-- Decorative Banners -->
+<div class="banner-wrapper" id="bannerWrapper">
+    <div class="bunting">✨ HAPPY 22ND BIRTHDAY ✨</div>
+</div>
+
+<main class="stage">
+
+    <!-- Step Indicator / Progress Text -->
+    <div class="status-pill" id="statusPill">Step 1 of 5</div>
+
+    <!-- Center Interactive Card -->
+    <div class="main-card" id="mainCard">
+
+        <!-- Stage 0: Initial Lights Prompt -->
+        <div class="scene active" id="scene-lights">
+            <div class="emoji-icon">💡</div>
+            <h2>It's completely dark in here...</h2>
+            <p>Click below to turn on the lights!</p>
+        </div>
+
+        <!-- Stage 1: Music Prompt -->
+        <div class="scene" id="scene-music">
+            <div class="emoji-icon">🎶</div>
+            <h2>Much better! But it's too quiet...</h2>
+            <p>Let's play some music!</p>
+        </div>
+
+        <!-- Stage 2: Decorate -->
+        <div class="scene" id="scene-decorate">
+            <div class="emoji-icon">🎈</div>
+            <h2>Time for decorations!</h2>
+            <p>Release the balloons and banners!</p>
+        </div>
+
+        <!-- Stage 3: The Cake & Candles -->
+        <div class="scene" id="scene-cake">
+            <div class="cake-box">
+                <div class="candle">
+                    <div class="flame" id="flame"></div>
+                </div>
+                <div class="cake">🎂</div>
+            </div>
+            <h2>Make a wish and blow out the candle!</h2>
+        </div>
+
+        <!-- Stage 4: Photo & Letter (Grand Reveal) -->
+        <div class="scene" id="scene-reveal">
+            <!-- In index.html: change src from "assets/photo.jpg" to "photo.jpg" -->
+            <div class="polaroid">
+                <img src="assets/dikshaBD.png" alt="Birthday Special Girl" />
+                <div class="polaroid-caption">Feeling 22 ✨</div>
+            </div>
+            <h1 class="headline">Happy Birthday!</h1>
+            <div class="letter-box">
+                <p id="typewriterText"></p>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Master Action Button -->
+    <button class="action-btn" id="actionBtn">Turn On Lights</button>
+
+</main>
+
+<script src="script.js"></script>
+</body>
+</html>
